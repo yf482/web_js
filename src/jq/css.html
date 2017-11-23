@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/web_js/js/jquery-3.1.0.min.js"></script>
+
+
+</head>
+<body>
+<p>Hello</p><p>2nd Paragraph</p>
+<div style="background-color: #ddd;width:200px;height:200px;">hello</div>
+<p id="ab">Hello</p>
+</body>
+</html>
+<script type="text/javascript" >
+    $("p").css({ color: "#ddff57", background: "#8aee4c" });
+//    $("p").css("color","red");
+    var p = $("p:last");
+    var offset = p.offset();
+//    p.html( "left: " + offset.left + ", top: " + offset.top );
+    $("p:last").offset({ top: 30, left: 30 });
+//    逐渐增加div的大小
+    $("div").click(function() {
+        $(this).css({
+            width: function(index, value) {
+                return parseFloat(value) * 1.2;
+            },
+            height: function(index, value) {
+                return parseFloat(value) * 1.2;
+            }
+        });
+    });
+//    获取匹配元素相对父元素的偏移。
+    var p = $("p:first");
+    var position = p.position();
+    $("#ab").html( "left: " + position.left + ", top: " + position.top );
+</script>

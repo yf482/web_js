@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript" >
+    ECMAScript 只有公用作用域
+
+//    对 ECMAScript 讨论上面这些作用域几乎毫无意义，因为 ECMAScript 中只存在一种作用域 - 公用作用域。
+//    ECMAScript 中的所有对象的所有属性和方法都是公用的。因此，定义自己的类和对象时，所有属性和方法默认都是公用的！
+    静态作用域
+
+//    静态作用域定义的属性和方法任何时候都能从同一位置访问。在 Java 中，类可具有属性和方法，无需实例化该类的对象，
+//    即可访问这些属性和方法，例如 java.net.URLEncoder 类，它的函数 encode() 就是静态方法。
+    function sayHello() {
+        alert("hello");
+    }
+
+    sayHello.alternate = function() {
+        alert("hi");
+    }
+    sayHello();		//输出 "hello"
+    sayHello.alternate();	//输出 "hi"
+
+
+    var oCar = new Object;
+    oCar.color = "red";
+    oCar.showColor = function() {
+        alert(
+            this.color
+        );
+    };
+
+    oCar.showColor();		//输出 "red"
+//    因为对象的属性可以在对象创建后动态定义，所有许多开发者都在 JavaScript 最初引入时编写类似下面的代码：
+    var oCar = new Object;
+    oCar.color = "blue";
+    oCar.doors = 4;
+    oCar.mpg = 25;
+    oCar.showColor = function() {
+        alert(this.color);
+    };
+//解决方案：工厂方式
+//要解决该问题，开发者创造了能创建并返回特定类型的对象的工厂函数（factory function）。
+//例如，函数 createCar() 可用于封装前面列出的创建 car 对象的操作
+    function createCar() {
+        var oTempCar = new Object;
+        oTempCar.color = "blue";
+        oTempCar.doors = 4;
+        oTempCar.mpg = 25;
+        oTempCar.showColor = function() {
+            alert(this.color);
+        };
+        return oTempCar;
+    }
+
+    var oCar1 = createCar();
+    var oCar2 = createCar();
+//    为函数传递参数
+    function createCar2(sColor,iDoors,iMpg) {
+        var oTempCar = new Object;
+        oTempCar.color = sColor;
+        oTempCar.doors = iDoors;
+        oTempCar.mpg = iMpg;
+        oTempCar.showColor = function() {
+            alert(this.color);
+        };
+        return oTempCar;
+    }
+
+    var oCar11 = createCar2("red",4,23);
+    var oCar22 = createCar2("blue",3,25);
+
+    oCar1.showColor();		//输出 "red"
+    oCar2.showColor();		//输出 "blue"
+</script>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript" >
+//    在工厂函数外定义对象的方法
+function showColor() {
+    console.log(this.color);
+}
+
+function createCar(sColor,iDoors,iMpg) {
+    var oTempCar = new Object;
+    oTempCar.color = sColor;
+    oTempCar.doors = iDoors;
+    oTempCar.mpg = iMpg;
+    oTempCar.showColor = showColor;
+    return oTempCar;
+}
+
+var oCar1 = createCar("red",4,23);
+var oCar2 = createCar("blue",3,25);
+
+oCar1.showColor();		//输出 "red"
+oCar2.showColor();		//输出 "blue"
+
+//构造函数方式
+//创建构造函数就像创建工厂函数一样容易。第一步选择类名，即构造函数的名字。根据惯例，这个名字的首字母大写，
+//以使它与首字母通常是小写的变量名分开。除了这点不同，构造函数看起来很像工厂函数。请考虑下面的例子：
+function Car(sColor, iDoors, iMpg) {
+    this.color = sColor;
+    this.doors = iDoors;
+    this.mpg = iMpg;
+    this.showColor = function () {
+        console.log(this.color);
+    };
+}
+
+var oCar11 = new Car("red", 4, 23);
+var oCar22 = new Car("blue", 3, 25);
+oCar11.showColor();		//输出 "red"
+oCar22.showColor();		//输出 "blue"
+
+//原型方式
+//该方式利用了对象的 prototype 属性，可以把它看成创建新对象所依赖的原型。
+//这里，首先用空构造函数来设置类名。然后所有的属性和方法都被直接赋予 prototype 属性。我们重写了前面的例子，代码如下：
+
+function Car2() {
+}
+Car2.prototype.color = "blue";
+Car2.prototype.doors = 4;
+Car2.prototype.mpg = 25;
+Car2.prototype.showColor = function() {
+    console.log(this.color);
+};
+var oCar2_1 = new Car2();
+var oCar2_2 = new Car2();
+oCar2_1.showColor();		//输出 "red"
+oCar2_2.showColor();		//输出 "blue"
+
+//原型方式的问题
+//原型方式看起来是个不错的解决方案。遗憾的是，它并不尽如人意。
+//首先，这个构造函数没有参数。使用原型方式，不能通过给构造函数传递参数来初始化属性的值，因为 Car1 和 Car2 的 color
+//属性都等于 "blue"，doors 属性都等于 4，mpg 属性都等于 25。这意味着必须在对象创建后才能改变属性的默认值，这点很令人讨厌，
+//但还没完。真正的问题出现在属性指向的是对象，而不是函数时。函数共享不会造成问题，但对象却很少被多个实例共享。请思考下面的例子：
+function Car3() {
+}
+
+Car3.prototype.color = "blue";
+Car3.prototype.doors = 4;
+Car3.prototype.mpg = 25;
+Car3.prototype.drivers = new Array("Mike","John");
+
+Car3.prototype.showColor = function() {
+    console.log(this.color);
+};
+
+var oCar3_1 = new Car3();
+var oCar3_2 = new Car3();
+oCar3_1.showColor();
+oCar3_2.showColor();
+
+
+oCar3_1.drivers.push("Bill");
+
+console.log(oCar3_1.drivers);	//输出 "Mike,John,Bill"
+console.log(oCar3_2.drivers);	//输出 "Mike,John,Bill"
+</script>

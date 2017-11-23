@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #grad {
+            background: -webkit-linear-gradient(red, blue); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(red, blue); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(red, blue); /* Firefox 3.6 - 15 */
+            background: linear-gradient(red, blue); /* 标准的语法 */
+        }
+        /*div*/
+        /*{*/
+            /*transform: rotateX(120deg);*/
+            /*-webkit-transform: rotateX(120deg); !* Safari and Chrome *!*/
+        /*}*/
+        @keyframes myfirst
+        {
+            from {background: red;}
+            to {background: yellow;}
+        }
+
+        @-webkit-keyframes myfirst /* Safari and Chrome */
+        {
+            from {background: red;}
+            to {background: yellow;}
+        }
+        div
+        {
+            animation: myfirst 5s;
+            -webkit-animation: myfirst 5s; /* Safari and Chrome */
+        }
+
+    </style>
+</head>
+<body>
+<div id="grad" style="width: 100px;height: 200px;">
+    221
+</div>
+
+</body>
+</html>

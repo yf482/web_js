@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/web_js/js/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <p>ee</p>sss
+    </div>
+    <div id="he">
+        <p>ee</p>sss
+    </div>
+    <span>ddd</span>
+    <span>ddd</span>
+</body>
+</html>
+<script type="text/javascript" >
+    $("div > p").css("background-color","red");
+    $(document.body).css( "background", "#ddd" );
+    $("#he").hide();
+//    创建一个 <input> 元素，同时设定 type 属性、属性值，以及一些事件。
+    $("<input>", {
+        type: "text",
+        val: "Test",
+        focusin: function() {
+            $(this).addClass("active");
+        },
+        focusout: function() {
+            $(this).removeClass("active");
+        }
+    }).appendTo("form");
+//    $(document).ready()的简写。
+    $(function(){
+        // 文档就绪
+        console.log("hello");
+    });
+
+    $("span").each(function (i) {
+        $(this).name = "span"+i;
+        $(this).color = "green";
+    })
+    $("div").each(function (index, domEle) {
+        // domEle == this
+        $(domEle).css("backgroundColor", "yellow");
+        if ($(this).is("#stop")) {
+            $("span").text("Stopped at div index #" + index);
+            return false;
+        }
+    });
+
+</script>

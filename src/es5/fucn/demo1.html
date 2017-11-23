@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    function sayHi() {
+        if (arguments[0] == "bye") {
+            return;
+        }
+        console.log(arguments[0]);
+    }
+    sayHi("123");
+    sayHi("bye");
+
+    function howManyArgs() {
+        console.log(arguments.length);
+    }
+
+    howManyArgs("string", 45);
+    howManyArgs();
+    howManyArgs(12);
+
+
+    function doAdd() {
+        if(arguments.length == 1) {
+            alert(arguments[0] + 5);
+        } else if(arguments.length == 2) {
+            alert(arguments[0] + arguments[1]);
+        }
+    }
+    doAdd(10);	//输出 "15"
+    doAdd(40, 20);	//输出 "60"
+
+//    ECMAScript 最令人感兴趣的可能莫过于函数实际上是功能完整的对象。
+    function sayHi(sName, sMessage) {
+        console.log("Hello " + sName + sMessage);
+    }
+    var sayHi2  =   new Function("sName", "sMessage", "alert(\"Hello \" + sName + sMessage);");
+
+    function doAdd(iNum) {
+        console.log(iNum + 20);
+    }
+    function doAdd(iNum) {
+        console.log(iNum + 10);
+    }
+    doAdd(10);	//输出 "20"
+//    如你所知，第二个函数重载了第一个函数，使 doAdd(10) 输出了 "20"，而不是 "30"。
+
+//  闭包  函数 addNum() 包括函数 doAdd() （闭包）。内部函数是一个闭包，因为它将获取外部函数的参数 iNum1 和 iNum2 以及全局变量 iBaseNum 的值。 addNum() 的最后一步调用了 doAdd()，把两个参数和全局变量相加，并返回它们的和。
+//这里要掌握的重要概念是，doAdd() 函数根本不接受参数，它使用的值是从执行环境中获取的。
+    var iBaseNum = 10;
+    function addNum(iNum1, iNum2) {
+        function doAdd() {
+            return iNum1 + iNum2 + iBaseNum;
+        }
+        return doAdd();
+    }
+    console.log(addNum(1,2));
+</script>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<li id="foo">1</li>
+<li id="bar">2</li>
+</body>
+</html>
+<script src="/web_js/js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+   /* if ($.browser.safari) {
+        alert("this is safari!");
+    }
+    if ( $.browser.msie ){
+        alert( $.browser.version );
+    }*/
+   $.each( [0,1,2], function(i, n){
+       console.log( "Item #" + i + ": " + n );
+   });
+   $.each( { name: "John", lang: "JS" }, function(i, n){
+       console.log( "Name: " + i + ", Value: " + n );
+   });
+
+   var settings = { validate: false, limit: 5, name: "foo" };
+   var options = { validate: true, name: "bar" };
+   jQuery.extend(settings, options);
+   console.log(settings);
+
+
+   var arr = [ 4, "Pete", 8, "John" ];
+   jQuery.inArray("John", arr);  //3
+   jQuery.inArray(4, arr);  //0
+   jQuery.inArray("David", arr);  //-1
+   jQuery.inArray("Pete", arr, 2);  //-1
+
+   console.log($('li').toArray());
+
+//   合并两个数组到第一个数组上。
+   var arr = $.merge( [0,1,2], [2,3,4] )
+    console.log(arr);
+
+//   解析一个JSON字符串
+   var obj = jQuery.parseJSON('{"name":"John"}');
+   console.log( obj);
+   console.log( obj.name === "John" );
+   console.log($.isArray([]) );
+   console.log($.isArray("") );
+
+
+    //检查是否是函数
+   function stub() {
+   }
+   var objs = [
+       function () {},
+       { x:15, y:20 },
+       null,
+       stub,
+       "function"
+   ];
+   jQuery.each(objs, function (i) {
+       var isFunc = jQuery.isFunction(objs[i]);
+       console.log(i + "- is fun: " + isFunc) ;
+   });
+//   测试是否为空对象
+   jQuery.isEmptyObject({}) // true
+   jQuery.isEmptyObject({ foo: "bar" }) // false
+//   测试是否为纯粹的对象
+   jQuery.isPlainObject({}) // true
+   jQuery.isPlainObject("test") // false
+
+//   确定它的参数是否是一个数字。
+   $.isNumeric("-10");  // true
+   $.isNumeric(16);     // true
+   $.isNumeric(0xFF);   // true
+   $.isNumeric("0xFF"); // true
+   $.isNumeric("8e5");  // true (exponential notation string)
+   $.isNumeric(3.1415); // true
+   $.isNumeric(+10);    // true
+   $.isNumeric(0144);   // true (octal integer literal)
+   $.isNumeric("");     // false
+   $.isNumeric({});     // false (empty object)
+   $.isNumeric(NaN);    // false
+   $.isNumeric(null);   // false
+   $.isNumeric(true);   // false
+   $.isNumeric(Infinity); // false
+   $.isNumeric(undefined); // false
+
+//   去掉字符串起始和结尾的空格。
+    console.log($.trim("  hello, how are you?  "));
+//   按照key/value对序列化普通对象
+   var params = { width:1680, height:1050 };
+   var str = jQuery.param(params);
+   console.log("str: " +  str)
+</script>
