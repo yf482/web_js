@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body ng-app="myapp" >
+		<div ng-controller="ctr01">
+			<span>{{money | currency}}</span>
+			<br/>
+			<span>{{money | currency:'￥'}}</span>
+			<br/>
+			<span>{{birthday | date:'yyyy-MM-dd'}}</span>
+			<br/>
+			<span>{{birthday2}}</span>
+		</div>
+		
+	</body>
+	
+</html>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	//一个controller一个作用域
+	var myapp = angular.module("myapp",[]);
+	myapp.controller("ctr01",function($scope){
+		$scope.money = 1222223;
+		$scope.birthday = new Date();
+		$scope.birthday2 = new Date();
+	})
+	
+</script>

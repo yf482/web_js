@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="CommonController">
+			<div ng-controller="Controller1">
+				<p>{{greeting.text}},yunfeng</p>
+				<button ng-click="test1()">test</button>
+			</div>
+			<div ng-controller="Controller2">
+				<p>{{greeting.text}},yunfeng</p>
+				<button ng-click="test2()">test</button>
+			</div>
+			<button ng-click="commonFuc()">common</button>
+		</div>
+		
+	</body>
+	
+</html>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+function CommonController($scope){
+	$scope.commonFuc=function(){
+		alert("common function");
+	}
+}
+function Controller1($scope){
+	$scope.greeting = {
+		text: 'hello'
+	};
+	$scope.test1()=function(){
+		alert("test1 function");
+	}
+}
+function Controller2($scope){
+	$scope.greeting = {
+		text: 'hello2'
+	};
+	$scope.test2()=function(){
+		alert("test2 function");
+	}
+}
+	
+</script>

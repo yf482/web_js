@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body ng-app="myapp" ng-init="uage=12">
+		<div ng-controller="ctr01">
+			<input type="text"  ng-model="name"/>
+			<br />
+			<span>{{name}} is {{uage}}</span>
+			<br/>
+			<span>{{g_name}} is {{uage}}</span>
+		</div>
+		<div ng-controller="ctr02">
+			<input type="text"  />
+			<br />
+			<span>{{uname}} is {{uage}}</span>
+			<br/>
+			<span>{{g_name}} is {{uage}}</span>
+		</div>
+		<div ng-controller="ctr03">
+			<input type="text"  />
+			<br />
+			<span>{{uname}} is {{uage}}</span>
+			<br/>
+			<span>{{g_name}} is {{uage}}</span>
+			<div ng-controller="ctr04">
+				<input type="text"  />
+				<br />
+				<span>{{uname}} is {{uage}}</span>
+				<br/>
+				<span>{{$parent.uname}} is {{uage}}</span>
+				<br/>
+				<span>{{g_name}} is {{uage}}</span>
+			</div>
+		</div>
+	</body>
+	
+</html>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	//一个controller一个作用域
+	var myapp = angular.module("myapp",[]);
+	myapp.controller("ctr01",function($scope){
+		$scope.uname = "abc1";
+	})
+	myapp.controller("ctr02",function($scope){
+		$scope.uname = "abc2";
+	})
+	myapp.controller("ctr03",function($scope,$rootScope){
+		$scope.uname = "abc2";
+		$rootScope.g_name = "g_name";
+	})
+	myapp.controller("ctr04",function($scope,$rootScope){
+		$scope.uname = "child name";
+	})
+	
+	angular.bootstrap(document,['myapp']);//手动关联，没有则是自动关联
+	
+</script>
